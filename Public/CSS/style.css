@@ -1,0 +1,108 @@
+::root {
+  font-size: 16px;
+}
+
+.container .header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  text-align: center;
+}
+
+.container .header #logo {
+  width: 80px;
+  height: 75px;
+}
+
+@media (min-width: 425px) {
+  .container .header #logo {
+    margin-right: 30px;
+  }
+}
+
+.container .header h1 {
+  height: 30px;
+}
+
+.container .header #title {
+  font-size: 1.5rem;
+}
+
+.container .header #quote {
+  font-size: 1rem;
+}
+
+@media (min-width: 425px) {
+  .container .header {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+}
+
+.container h1 {
+  text-align: center;
+}
+
+.container .loginForm {
+  border: 1px solid black;
+  padding: 5px;
+  max-width: 410px;
+}
+
+.container .loginForm .formRow {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: 10px 0;
+}
+
+.container .loginForm .formRow input {
+  max-width: 397px;
+}
+
+.container .loginForm .btnLogin {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0 auto;
+}
+
+@media (min-width: 425px) {
+  .container .loginForm {
+    margin: 0 auto;
+  }
+}
+
+.container #formEmploye {
+  display: none;
+}
+
+.container .errors {
+  list-style: none;
+  padding: 5px;
+  width: 200px;
+  display: block;
+  margin: 20px auto 0;
+}
+
+.container .errors .error {
+  margin: 5px 0;
+  border: 1px solid #ff0000;
+  background-color: #ff6464b6;
+  color: #c00000;
+}
+
+.container button {
+  display: block;
+  margin: 0 auto;
+  margin: 20px auto 0;
+}
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/CSS/membre.css" type="text/css" >
+    <title>Document</title>
+</head>
+<body>
+  <div class="headerContainer">
+    <%- include('Layout/header') -%>
+    <% if (user.Admin === true) { %>
+        <%- include('Layout/navAdmin') -%>
+        <% } else { %>
+          <%- include('Layout/navEmploye') -%>
+        <% } %>
+    <div class="bvn">
+        <% if (authenticated) { %>
+            <p>Bienvenue <span><%= user.Prenom %> <%= user.Nom %></span> dans votre espace <%= user.Admin === true ? 'administrateur' : 'employe' %> .</p>
+            
+        <% } else { %>
+            <p>Vous devez d'abord vous connecter pour accéder à cette page.</p>
+            <a href="/">Retour à la page d'accueil</a>
+        <% } %>
+    </div>
+   </div>
+   <div class="container">
+    <div class="innerContainer">
+        <form action="/employe/RobBor/membres">
+            <select id="listMembre" name="selectedMembre">
+                <option value=" ">Choisir un membre</option>
+                <% for(let i = 0; i < membres.length; i++) { %>
+                  <option value="<%= membres[i].CodeMembre %>"><%= membres[i].Prenom + " " + membres[i].Nom +' - '+membres[i].CodeMembre %></option>
+                  <% } %>
+              </select>
+              <input type="text" name="Telephone" id="Telephone" placeholder="#Telephone">
+              <input type="submit" value="Afficher informations">
+           </form>
+           <div class="membreDisplay">
+            <% if (selectedMembre != null) { %>
+                <div class="membreInfo">
+                    <ul>
+                        <li><span><%= selectedMembre.CodeMembre %></span></li>
+                        <li><span><%= selectedMembre.Prenom %> <%= selectedMembre.Nom %></span></li>
+                        <li><%= selectedMembre.Adresse %></li>
+                        <li><%= selectedMembre.Telephone %></li>
+                        <li><%= selectedMembre.Courriel %></li>
+                    </ul>
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="lists">
+                    <div class="membrePret">
+                        <p>Liste de prets</p>
+                    <% for(let i = 0; i < membrePret.length; i++) { %>
+                            <div class="pretItem" >
+                                <% if(membrePret[i].Actif) { %>
+                                    <a class="cancel"  href="<%=`&CodePret=${membrePret[i].CodePret}`%>"><i class="fa-solid fa-circle-xmark"></i></a>
+                                <% } %>
+                                <ul>
+                                    <li>Code pret: <%= membrePret[i].CodePret %></li>
+                                        <hr>
+                                    <li>Document:  <%= membrePret[i].CodeDocument %> </li>
+                                    <hr>
+                                    <li>Date debut:  <%= membrePret[i].DateDebut %></li>
+                                    <hr>
+                                    <li>Date fin:  <%= membrePret[i].DateFin %></li>
+                                    <hr>
+                                    <li>Date retour:  <%= membrePret[i].DateRetour? membrePret[i].DateRetour: 'document non retourne' %></li>
+                                    <hr>
+                                    <li>Actif:  <%= membrePret[i].Actif %></li>
+                                </ul>
+                            </div>    
+                        <% } %>
+                    </div>
+                    <div class="membreReserv">
+                        <p>Reservations actives</p>
+                        <% for(let i = 0; i <  membreReservation.length; i++) { %>
+                            <% if (membreReservation[i]['En cours']) { %>
+                            <div>
+                                <ul>
+                                    <li>Code Reservation <%= membreReservation[i].CodeReservation %></li>
+                                    <hr>
+                                    <li>Document <%= membreReservation[i].CodeDocument %></li>
+                                    <hr>
+                                    <li>Date Reservation <%= membreReservation[i].DateReservation %></li>
+                                    
+                                </ul>
+                            </div>
+                            <% } %>
+                        <% } %>
+                    </div>
+                </div>
+        <% } %>
+           </div>
+    </div>
+   </div>
+    <script>
+        const form = document.querySelector('form');//recupere le formulaire
+        const annulerLink = document.querySelectorAll('.cancel')//recupere le lien annuler
+        form.addEventListener('sumbit',(event)=>{
+            event.preventDefault(); // Prevent default form submission
+            const selectedValue = document.getElementById('listMembre').value;
+            form.action = `/employe/RobBor/membresCodeMembre=${selectedValue}`
+            form.submit();
+        });
+        window.addEventListener('load', () => {
+            annulerLink.forEach(link => {
+                let currentHref = window.location.href; // Get the current URL
+                const existingHref = link.getAttribute('href'); // Get the existing href
+            if (currentHref.split('&').length >= 2) {//si 2e querry existe
+            const firstQuery = currentHref.split('&')[0];//recupere 1er query
+            currentHref = `${firstQuery}`; //recreer url original sans 2e query
+        }
+             const newHref = `${currentHref}${existingHref}`;//creer url du lien
+                link.setAttribute('href', newHref);//etablie le lien
+            });
+        });
+        const phoneNumberInput = document.getElementById('Telephone');
+
+        phoneNumberInput.addEventListener('input', (e) => {
+            let input = e.target.value.replace(/\D/g, '').substring(0, 10); // Remove non-numeric characters
+            const areaCode = input.substring(0, 3);
+            const middle = input.substring(3, 6);
+            const last = input.substring(6, 10);    
+            if (input.length > 6) {
+                input = `${areaCode}-${middle}-${last}`;
+            } else if (input.length > 3) {
+                input = `${areaCode}-${middle}`;
+            } else if (input.length > 0) {
+                input = `${areaCode}`;
+            }
+             phoneNumberInput.value = input;
+        });
+
+       /* */
+    </script>
+</body>
+</html>

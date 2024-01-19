@@ -1,0 +1,863 @@
+@import '_breakpoints';
+::root{
+    font-size: 16px;  
+}
+$green : #9fcf6c;
+$grey :#70838a;
+$greyTransparent :#70838a9d;
+$darkGrey:#344555;
+*,*::before,*::after{
+    margin: 0;
+    padding: 0;box-sizing: border-box;
+}
+
+.headerContainer{
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    nav{
+        text-align: center;
+        padding-top: 20px;
+        position: fixed;
+        z-index: 999;
+        width: 200px ;
+        top: 0;
+        left: -200px;
+        height: 100vh;
+        background-color: $grey;
+        color:white;
+        transition: all 0.5s ease;
+
+        .navHeader{
+            hr{
+                margin: 10px 0;
+                background-color: $darkGrey;
+            }
+            @include lg{
+                display: none;
+                width: 100%;
+            }
+        }
+        
+      
+        
+        button{
+            color: white;
+            width: 25px;
+            height: 25px;
+            background-color:$greyTransparent;
+            position: absolute;
+            z-index: 999;
+            top: 0px;
+            left: 200px;
+            #hamburger{
+                display: block;
+            }
+            #cross{
+                display: none;
+            }
+            @include md{
+                transform: scale(1.5);
+            }
+        }
+        #logo{
+            width: 80px;
+            height: 75px;
+            display: block;
+            margin: 0 auto;
+            border-radius: 100%;
+        }
+        #title{
+          font-size: 1.2rem;
+          
+        }
+        #quote{
+            font-size: 0.9rem;
+            
+        }
+        ul{
+            list-style-type: none;
+            text-align: center;
+            li{
+                margin:10px;
+                color: $green;
+                display: flex;
+                
+                
+                i{
+                    margin: 5px;
+                    
+                }
+                a {
+                    color: white;
+                    margin-left: 15px;
+                    text-decoration: none;
+                    font-size: 1.2rem;
+            
+                    
+            
+                    &:visited,
+                    &:focus,
+                    &:active {
+                        text-decoration: none;
+                    }
+                    @include xl{
+                        &:hover{
+                            color: $green;
+                            cursor:pointer;
+                            text-decoration: underline;
+                            transition: all 0.3s ease-out;
+                        }
+                    }
+                }
+                
+            }
+            details{
+                width: 100%;
+                
+                summary{
+                    color: white;
+                    font-size: 1.2rem;
+                    display: flex;
+                    @include xl{
+                        &:hover{
+                            color: $green;
+                            cursor:pointer;
+                            text-decoration: underline;
+                            transition: all 0.3s ease-out;
+                        }
+                    }
+                }
+                div{
+                    form{
+                        @include lg{
+                            display: flex;
+                            flex-direction: column;
+                            margin-left: -50px;
+                        }
+                    }
+                    @include lg{
+                        background-color: $grey;
+                        margin-left: -100px;
+                        position: fixed;
+                        z-index: 999;
+                    }
+                    @include xl{
+                        position: fixed;
+                        z-index: 999;
+                        margin-left: 0;
+                    }
+                }
+                
+            }
+            @include lg{
+                display: flex;
+            }
+        }
+        @include lg{
+            position: relative;
+            padding: 0;
+            left: 0;
+            display: flex;
+            width: 100%;
+            height: 75px;
+            flex-wrap: wrap;
+            overflow-x: scroll;
+        }
+        @include xl{
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+    }
+    .header{
+        display: flex;
+        text-align: center;
+        #logo{
+            width: 80px;
+            height: 75px;
+            @include sm{
+                margin-right: 30px;
+            }
+           
+        }
+        h1{
+            height: 30px;
+        }
+        #title{
+          font-size: 1.5rem;
+          
+        }
+        #quote{
+            font-size: 1rem;
+            
+        }
+        @include sm{
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    .bvn{
+        margin: 10px 0;
+        width: 100%;
+        background-color: $darkGrey;
+        color: white;
+        font-size: 1.1rem;
+        span{
+            color: $green;
+        }
+        @include sm{
+            text-align: center;
+            font-size: 1.5rem;
+        }
+    }
+}
+
+.documentContainer{
+        
+       
+    #documentsList{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        .description{
+            color: white;
+            background-color: $darkGrey;
+            text-align: center;
+            width: 300px;
+            border-radius: 15px;
+            box-shadow: 0 0  5px 3px black;
+            position: fixed;
+            margin-top: 25px;
+        
+            @include md{
+                height: 36px;
+            }
+            @include lg{
+                
+
+            }
+        }
+        .documentItem{
+            box-shadow: 0 0  5px 3px black;
+            border-radius: 15px;
+            width: 300px;
+            height: 600px;
+            margin: 15px auto;
+            display: block;
+            overflow: hidden;
+            
+            
+        .card{
+            .cardContainer{
+                
+                .front{
+                    overflow: hidden;
+                    height: 430px;
+                    img{
+                        width: 300px;
+                        height: 430px;
+                    }
+                }
+                .back{
+                    overflow-y: scroll;
+                    overflow-x:hidden;
+                    height: 170px;
+                    background-color: $darkGrey;
+                    color: white;
+                    p{
+                        margin-top: 8px;
+                        text-align: center;
+                        background-color: $darkGrey;
+                        span{
+                            color: $green;
+                        }
+                    }
+                    ul {
+                        list-style-type: none;
+                        display: flex;
+                        flex-wrap: wrap;
+                        width: 300px;
+                        padding: 0;
+                        margin: 0;
+    
+                        li {
+                            width: calc(33.33% - 10px);
+                            margin: 5px;
+                            text-align: center;
+                          }
+                      }   
+                }
+            }
+        }
+     }
+     ///////////// page reservation employe ////////////////////
+        .reservationItem{
+           
+            width: 300px;
+            padding: 10px;
+            margin-bottom: 15px;
+            list-style: none;
+            background-color: $darkGrey;
+            color: white;
+            border-radius: 15px;
+            margin: 20px;
+            box-shadow: 0 0  5px 3px black;
+            
+            P{
+                span{
+                    color: $green;
+                }
+            }
+            ul{
+                list-style: none;
+            }
+            button{
+                display: block;
+                margin: 0 auto;
+                width: 104px;
+                height: 40px;
+                background-color: $green;
+                border-radius: 15px;
+                transition: all 0.3s ease-out;
+                    a {
+                        text-decoration: none;
+                        color: $darkGrey;
+                        &:visited,
+                        &:focus,
+                        &:active {
+                        text-decoration: none;
+                        }   
+                    }
+                    @include xl{
+                        &:hover{
+                            transform:scale(1.1);
+                            cursor: pointer;
+                         }
+                    }
+            }
+        }
+        .employe-reservation,
+        .pret-retard {
+            border: 3px solid $green; 
+          }
+   }
+    .reserver{
+        display: block;
+        margin: 0 auto;
+        width: 104px;
+        height: 40px;
+        padding: 10px;
+        border-radius: 15px;
+        background-color: $green;
+        color: $darkGrey;
+        position: fixed;
+        transition: all 0.5s ease;
+
+         a{
+            color: $darkGrey;
+            text-decoration: none;
+            height: 100%;
+        
+            width: 100%;
+            
+            &:visited,
+            &:focus,
+            &:active {
+                text-decoration: none;
+            }
+            @include lg{
+                &:hover{
+                    color: white;
+                    
+                }
+            }
+            
+         }
+    
+        @include md{
+            height: 36px;
+        }
+        @include lg{
+            right: calc(50% - 50px);
+            top: 25%;
+            &:hover{
+                background-color: $darkGrey;
+                color: white;
+                cursor: pointer;
+            }
+
+        }
+    }
+}
+ ///////////// page pret/retour employe ////////////////////
+ .container{
+    display: flex;
+    flex-direction: column;
+ .prets{
+    border: 3px solid $green;
+    width: 90%;
+    padding: 15px;
+    margin: 0 auto;
+    margin: 20px;
+    color: white;
+    background-color: $darkGrey;
+    box-shadow: 0 0  5px 3px black;
+    border-radius: 15px;
+    max-width: 420px;
+    h1{
+        color: $green;
+        text-align: center;
+    }
+    form{
+        .formEntry{
+            display: flex;
+            flex-direction: column;
+            margin: 20px;
+            font-size: 1.2rem;
+          }
+          input{
+            &[type='submit'] {
+                display: block;
+                margin: 0 auto;
+                height: 30px;
+                width: 130px;
+                background-color: $green;
+                color: $darkGrey;
+                border-radius: 15px;
+                font-weight: bold;
+              }
+          }
+    }
+    @include sm{
+        margin: 20px auto;
+    }
+    }
+ .retours{
+    border: 3px solid $green;
+    width: 90%;
+    padding: 15px;
+    margin: 0 auto;
+    margin: 20px;
+    color: white;
+    background-color: $darkGrey;
+    box-shadow: 0 0  5px 3px black;
+    border-radius: 15px;
+    max-width: 420px;
+    max-height: 230px;
+    h1{
+        color: $green;
+        text-align: center;
+    }
+    form{
+        font-size: 1.2rem;
+        .formEntry{
+            display: flex;
+            flex-direction: column;
+            margin: 20px;
+            
+          }
+          input{
+            &[type='submit'] {
+                display: block;
+                margin: 0 auto;
+                height: 30px;
+                width: 130px;
+                background-color: $green;
+                color: $darkGrey;
+                border-radius: 15px;
+                font-weight: bold;
+              }
+          }
+    }
+    .reservationAlert{
+        
+        background-color: $darkGrey;
+        position: absolute;
+        position: absolute;
+        top: 50%; // Move the top edge to the vertical center of the parent
+        left: 50%; // Move the left edge to the horizontal center of the parent
+        transform: translate(-50%, -50%); // Adjust the position by half of the child's width and height
+        width: 90%;
+        height: 270px;
+        max-width: 420px;
+        box-shadow: 0 0  5px 5px black;
+        
+        div{
+            height: 100%;
+            width: 100%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        
+            *{
+                margin: 10px;
+                text-align: center;
+                font-size: 1.2rem;
+            }
+            ul{
+                margin: 0 auto;
+            }
+            button{
+                height: 30px;
+                width: 30px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: $green;
+                position: absolute;
+                margin: 0;
+                top: 0;
+                right: 0;
+                #X{
+                    transform: scale(1.5);
+                    color: $darkGrey;
+                }
+            }
+        }
+    }
+    @include sm{
+        margin: 0 auto;
+    }
+ }
+ .listPret{
+    width: 90%;
+    max-width: 460px;
+    max-height: 585px;
+    margin: 20px auto;
+    overflow-y: scroll;
+    border: 3px solid $green;
+    background-color: $greyTransparent;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 0  5px 3px black;
+    position: relative;
+    transition: all 0.5s ease 0.3s; 
+    
+    h2{
+        margin-bottom: 10px;
+        color: $green;
+    }
+    button{
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        height: 30px;
+        width: 30px;
+        background-color: $darkGrey;
+        i{
+            transform: scale(2);
+            color: $green;
+        }
+        
+    }
+    .pretItem{
+        border: 3px solid $green;
+        padding: 15px;
+        margin: 15px auto;
+        color: white;
+        background-color: $darkGrey;
+        box-shadow: 0 0  5px 3px black;
+        border-radius: 15px;
+        max-width: 420px;
+        h2{
+            color: $green;
+            text-align: center;
+        }
+        ul{
+        list-style-type: none;
+        }
+    }
+    @include lg{
+        
+        margin: 20px;
+     }
+ }
+ .listRetards{
+    transition: all 0.5s ease;
+    border: 3px solid $green;
+        padding: 15px;
+        margin: 15px auto;
+        color: white;
+        background-color: $darkGrey;
+        box-shadow: 0 0  5px 3px black;
+        border-radius: 15px;
+        max-width: 420px;
+        display: none;
+        position: relative;
+        h2{
+            color: $green;
+        }
+        button{
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            height: 30px;
+            width: 30px;
+            background-color: $greyTransparent;
+            transform:  rotateY(180deg);
+            i{
+                transform: scale(2);
+                color: $green;
+            }
+        }
+        
+        .retardItem{
+            border: 3px solid $green;
+        padding: 15px;
+        margin: 15px auto;
+        color: white;
+        background-color: $greyTransparent;
+        box-shadow: 0 0  5px 3px black;
+        border-radius: 15px;
+        max-width: 420px;
+           
+            ul{
+            list-style-type: none;
+            }
+        }
+    }
+    .formContainer{
+        //////////////// creer user ///////////////
+        width: 100%;
+    .formEmploye,
+    .formMembre{
+        
+        form{
+            position: relative;
+            width: 90%;
+            max-width: 382px;
+            margin: 0 auto;
+            border: 3px solid $green;
+            border-radius: 15px;
+            background-color: $darkGrey;
+            box-shadow: 0 0 5px 3px black;
+            color: white;
+            .formEntry{
+                display: flex;
+                flex-direction: column;
+                margin: 20px;
+                font-size: 1.2rem;
+              }
+              input{
+                &[type='submit'] {
+                    display: block;
+                    margin: 0 auto;
+                    height: 30px;
+                    width: 130px;
+                    background-color: $green;
+                    color: $darkGrey;
+                    border-radius: 15px;
+                    font-weight: bold;
+                  }
+              }
+              p{
+                margin: 0 auto;
+                display: block;
+                width: 150px;
+                font-size: 1.2rem;
+                color: $green;
+                font-weight: bold;
+              }
+        }
+        .flip{
+            color: $green;
+            background-color: $darkGrey;
+            position: absolute;
+            right: 15px;
+            top: 10px;
+            transform: scale(1.5);
+            @include lg{
+                display: none;
+                 }
+        }
+        
+    }
+    .formEmploye{
+        display: none;
+        @include lg{
+        display: block;
+        width: 382px;
+         }
+    }
+    .formMembre{
+        @include lg{
+            display: block;
+            width: 382px;
+             }
+    }
+    @include lg{
+        display: flex;
+        justify-content: center;
+    }
+    }
+
+    @include lg{
+        
+        margin: 20px;
+     }
+    
+ }
+
+
+ @include lg{
+    flex-direction: row;
+    justify-content: center;
+ }
+
+
+////////////// Page listeMembre //////////////
+.innerContainer{
+    width:90%;
+    height: 100%;
+    background-color: $darkGrey;
+    margin: 0 auto;
+    padding: 5px;
+    border: 3px solid $green;
+    border-radius: 15px;
+    box-shadow: 0 0  5px 3px black;
+    max-width: 900px;
+    form{
+        margin: 0 auto;
+        width:232px;
+        input[type='submit']{
+            background-color: $green;
+            padding: 5px;
+        }
+        input[type='text']{
+            width: 154px;
+        }
+    }
+     .membreDisplay{
+        
+        .membreInfo{
+            border: 3px solid $green;
+            margin: 20px;
+            background-color: $darkGrey;
+            color: white;
+            padding: 10px;
+            display: flex;
+            position: relative;
+            max-width: 285px;
+            ul{
+                list-style-type: none;
+                li{
+                    span{
+                        color: $green;
+                    }
+                }
+            }
+            i{
+                position: absolute;
+                right: 15%;
+                top: 40%;
+                transform: scale(5);
+                color: $green;
+            }
+            @include sm{
+                margin: 5px auto;
+            }
+            @include lg{
+                margin: 5px auto;
+            }
+         }
+        .lists{
+            .membrePret{
+                border: 3px solid $green;
+                margin: 20px;
+                padding: 5px;
+                background-color: $greyTransparent;
+                max-width: 425px;
+                flex: 1;
+                overflow-y: scroll;
+                .pretItem{
+                    position: relative;
+                    padding: 10px 5px 5px 5px;
+                    .cancel{
+                        position: absolute;
+                        right: 5px  ;
+                        top:2px;
+                        i{
+                            color: $green;
+                            transform: scale(1.3);
+                        }
+                    }
+                }
+                p{
+                    color: $green;
+                    text-align: center;
+                    font-size: 1.3rem;
+                    font-weight: bold;
+                }
+                div{
+                        background-color: $darkGrey;
+                        margin: 5px 0;
+                        padding: 5px;
+                        color: white;
+                        box-shadow: 0 0  3px 1px black;
+                    ul{
+                        list-style-type: none;
+                        hr{
+                            border-top: 2px solid $green;
+                        }
+                    }
+                }
+                @include sm{
+                    margin: 10px auto;
+                }
+            }
+            .membreReserv{
+                border: 3px solid $green;
+                margin: 20px;
+                padding: 5px;
+                background-color: $greyTransparent;
+                max-width: 425px; 
+                flex: 1;
+                overflow-y: scroll;
+                p{
+                    color: $green;
+                    text-align: center;
+                    font-size: 1.3rem;
+                    font-weight: bold;
+                }
+                div{
+                    background-color: $darkGrey;
+                        margin: 5px 0;
+                        padding: 5px;
+                        color: white;
+                        box-shadow: 0 0  3px 1px black;
+                        
+                    ul{
+                        list-style-type: none;
+                        hr{
+                            border-top: 2px solid $green;
+                        }
+                    }
+                }
+                @include sm{
+                    margin: 10px auto;
+                }
+            }
+            @include lg{
+                display: flex;
+                flex-direction: row;
+            }
+        }
+     }
+  
+}
+.ic2{
+
+    .PR{
+        @include lg{
+            *{
+                flex: 1;
+            }
+        }
+    }
+    @include lg{
+        display: flex;
+    }
+}
+ 

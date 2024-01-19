@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/CSS/style.css" type="text/css" >
+    <title>Document</title>
+</head>
+<body>
+   <!--<%- include('layout/header') -%>--> 
+    <div class="container">
+        
+        <main>
+            <%- include('Layout/header') -%>
+            <div id="formMembre">
+                <form class="loginForm"  action="/membre/login" method="post" >
+                    <label>Connection membre</label>
+                     <!-- email membre -->
+                     <div class="formRow">
+                        <label for="Courriel">Email membre:</label>
+                        <input name="Courriel" id="Courriel" type="text" placeholder="Entrer email membre..." data-sb-validations="required" />
+                       <!-- <div data-sb-feedback="code:required">Un code de produit est requis.</div> -->
+                    </div>
+                    <!-- Mot de passe -->
+                    <div class="formRow">
+                        <label for="Mdp">Mot de passe:</label>
+                        <input name="Mdp" id="Mdp" type="text" placeholder="Entrer le mot de passe..." data-sb-validations="required" />
+                    </div>
+                    <input class="btnLogin" type="submit" value="Se connecter">
+                    
+                </form>
+                <button onclick="hideElement('formMembre'); showElement('formEmploye')">Connection employe</button>
+            </div>
+
+            <div id="formEmploye">
+                <form class="loginForm"  action="/employe/login" method="post" >
+                    <label>Connection employe</label>
+                    <!-- email membre -->
+                    <div class="formRow">
+                       <label for="Courriel">Email employe:</label>
+                       <input name="Courriel" id="CourrielEmp" type="text" placeholder="Entrer Courriel employe..." data-sb-validations="required" />
+                      <!-- <div data-sb-feedback="code:required">Un code de produit est requis.</div> -->
+                   </div>
+                   <!-- Mot de passe -->
+                   <div class="formRow">
+                       <label for="Mdp">Mot de passe:</label>
+                       <input name="Mdp" id="MdpEmp" type="text" placeholder="Entrer le mot de passe..." data-sb-validations="required" />
+                   </div>
+                   <input class="btnLogin" type="submit" value="Se connecter">
+               </form>
+               <button onclick="hideElement('formEmploye'); showElement('formMembre')">Connection membre</button>
+            </div>
+            <% if(errors != null && errors.length > 0){ %>
+                <ul class="errors">
+                <% for (var i = 0; i < errors.length; i++) { %>
+                <li class="error">
+                <%= errors[i] %>
+                </li>
+                <% } %>
+                </ul>
+                <% } %>
+        </main>  
+    </div>
+    <script >
+        function hideElement(id) {//pour cacher l'element au id specifie
+    var element = document.getElementById(id);
+    if (element) {
+      element.style.display = 'none';
+    }
+    console.log("cache");
+  }
+  function showElement(id) {
+    var element = document.getElementById(id);
+    if (element) {
+      element.style.display= 'block'; 
+    }
+    console.log("visble");
+  }
+  
+    </script>
+</body>
+</html>

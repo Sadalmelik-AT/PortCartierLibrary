@@ -1,0 +1,52 @@
+[
+    {
+      "CodeDocument": "M001",
+      "Titre": "Inception",
+      "Auteur": "Christopher Nolan",
+      "Annee": "2010",
+      "Categorie": "Film",
+      "Classement": "ado",
+      "Genre": "Science-fiction",
+      "Description": "Un film de casse qui explore les rêves.",
+      "Reserve": false,
+      "href":"/Assets/inception.jpg"
+    },
+    {
+      "CodeDocument": "B001",
+      "Titre": "Ne tirez pas sur l'oiseau moqueur",
+      "Auteur": "Harper Lee",
+      "Annee": "1960",
+      "Categorie": "Livre",
+      "Classement": "ado",
+      "Genre": "Fiction",
+      "Description": "Un roman classique traitant de questions sérieuses de race et de moralité.",
+      "ISBN": "9780061120084",
+      "Reserve": false,
+      "href":"/Assets/oiseaumoqueur.jpg"
+    },
+    {
+      "CodeDocument": "D001",
+      "Titre": "Thriller",
+      "Auteur": "Michael Jackson",
+      "Annee": "1982",
+      "Categorie": "Disque musical",
+      "Classement": "ado",
+      "Genre": "Pop",
+      "Description": "L'un des albums les plus vendus de tous les temps.",
+      "Reserve": false,
+      "href":"/Assets/thriller.jpg"
+    },
+    {
+      "CodeDocument": "G001",
+      "Titre": "The Legend of Zelda: Breath of the Wild",
+      "Auteur": "Nintendo",
+      "Annee": "2017",
+      "Categorie": "Jeu vidéo",
+      "Classement": "enfant",
+      "Genre": "Action-Aventure",
+      "Description": "Jeu d'action-aventure en monde ouvert se déroulant dans l'univers de Zelda.",
+      "Reserve": false,
+      "href":"/Assets/zeldaBoW.jpg"
+    }
+  ]
+  

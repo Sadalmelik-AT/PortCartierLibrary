@@ -1,0 +1,19 @@
+[
+    {
+        "CodeEmploye": "EMP001",
+        "Prenom": "Rob",
+        "Nom": "Bor",
+        "Courriel": "rb@example.com",
+        "Mdp": "password",
+        "Admin": false
+      },
+      {
+        "CodeEmploye": "EMP002",
+        "Prenom": "Tina",
+        "Nom": "Nati",
+        "Courriel": "tn@example.com",
+        "Mdp": "password456",
+        "Admin": true
+      }
+      
+]

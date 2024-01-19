@@ -1,0 +1,21 @@
+[
+    {
+      "CodeMembre": "MBR001",
+      "Nom": "Doe",
+      "Prenom": "John",
+      "Adresse": "123 Main St",
+      "Telephone": "444-444-4444",
+      "Courriel": "john@example.com",
+      "Mdp": "password123"
+    },
+    {
+      "CodeMembre": "MBR002",
+      "Nom": "Ogre",
+      "Prenom": "Shrek",
+      "Adresse": "456 Elm St",
+      "Telephone": "555-555-5555",
+      "Courriel": "shrek@ogre.com",
+      "Mdp": "shrek123"
+    }
+  ]
+  

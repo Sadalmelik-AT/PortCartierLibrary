@@ -1,0 +1,90 @@
+// Import the _breakpoints.scss file
+@import '_breakpoints';
+
+$main-purple: #aa2bd1;
+$main-blue: #2de2e6;
+
+::root{
+  font-size: 16px;
+}
+// Your other styles...
+
+.container{
+
+  .header{
+    display: flex;
+    text-align: center;
+    #logo{
+        width: 80px;
+        height: 75px;
+        @include sm{
+            margin-right: 30px;
+        }
+       
+    }
+    h1{
+        height: 30px;
+    }
+    #title{
+      font-size: 1.5rem;
+      
+    }
+    #quote{
+        font-size: 1rem;
+        
+    }
+    @include sm{
+        justify-content: center;
+        align-items: center;
+    }
+}
+  & h1{
+    text-align: center;
+  }
+  .loginForm {
+    border: 1px solid black;
+    padding: 5px;
+    max-width: 410px;
+    & .formRow {
+      display: flex;
+      flex-direction: column;
+      margin: 10px 0;
+      & input{
+        max-width: 397px;
+      }
+    }
+  
+    & .btnLogin {
+      display: flex;
+      margin: 0 auto;
+    }
+  
+    //media queries/////
+    
+    @include sm{
+      margin: 0 auto;
+    }
+  }
+  #formEmploye{
+    display: none;
+  }
+  & .errors{
+
+    list-style: none;
+    padding: 5px;
+    width: 200px;
+    display: block;
+    margin: 20px auto 0;
+    & .error{
+      margin: 5px 0;
+      border: 1px solid #ff0000;
+      background-color: #ff6464b6;
+      color: #c00000;
+    }
+  }
+  button{
+    display: block;
+    margin: 0 auto;
+    margin: 20px auto 0;
+  }
+}

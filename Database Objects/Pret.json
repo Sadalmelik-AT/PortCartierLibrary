@@ -1,0 +1,33 @@
+[
+    {
+      "CodePret": "PRT001",
+      "CodeMembre": "MBR001",
+      "CodeEmploye": "EMP001",
+      "CodeDocument": "M001",
+      "DateDebut": "2023-12-14",
+      "DateFin": "2023-12-21",
+      "DateRetour": "",
+      "Actif": true
+    },
+    {
+      "CodePret": "PRT002",
+      "CodeMembre": "MBR002",
+      "CodeEmploye": "EMP002",
+      "CodeDocument": "D001",
+      "DateDebut": "2023-12-15",
+      "DateFin": "2023-12-22",
+      "DateRetour": "",
+      "Actif": true
+    },
+    {
+      "CodePret": "PRT003",
+      "CodeMembre": "MBR001",
+      "CodeEmploye": "EMP001",
+      "CodeDocument": "G001",
+      "DateDebut": "2023-12-01",
+      "DateFin": "2023-12-07",
+      "DateRetour": "2023-12-10",
+      "Actif": false
+    }
+  ]
+  

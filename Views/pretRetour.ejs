@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/CSS/membre.css" type="text/css" >
+    <title>Document</title>
+</head>
+<body>
+   <div class="headerContainer">
+    <%- include('Layout/header') -%>
+    <% if (user.Admin === true) { %>
+        <%- include('Layout/navAdmin') -%>
+        <% } else { %>
+          <%- include('Layout/navEmploye') -%>
+        <% } %>
+    <div class="bvn">
+        <% if (authenticated) { %>
+            <p>Bienvenue <span><%= user.Prenom %> <%= user.Nom %></span> dans votre espace <%= user.Admin === true ? 'administrateur' : 'employe' %> .</p>
+            
+        <% } else { %>
+            <p>Vous devez d'abord vous connecter pour accéder à cette page.</p>
+            <a href="/">Retour à la page d'accueil</a>
+        <% } %>
+    </div>
+   </div>
+   <div class="container">
+    <div class="innerContainer">
+        <div class="ic2">
+            <div class="PR">
+                <div class="prets">
+                    <h1>Creer un pret</h1>
+                    <form action="/submit" method="post" id="formPret">
+                        <div class="formEntry">
+                            <label for="selectedDocument">Choisir un document</label>
+                        <select id="listPret" name="selectedDocument">
+                          <% for(let i = 0; i < documents.length; i++) { %>
+                
+                            <% let documentPrete = prets.find(d => d.CodeDocument === documents[i].CodeDocument); %>
+                            <% if (!documentPrete || (documentPrete && documentPrete.Actif === false)) { %>
+                                <option value="<%= documents[i].CodeDocument %>"><%= documents[i].Titre %></option>
+                                <% } %>
+                            <% } %>
+                        </select>
+                        </div>
+                        <div class="formEntry">
+                            <label for="selectedDocument">Choisir un document</label>
+                        <select id="listMembre" name="selectedMembre">
+                          <% for(let i = 0; i < membres.length; i++) { %>
+                            <option value="<%= membres[i].CodeMembre %>"><%= membres[i].Prenom + " " + membres[i].Nom%></option>
+                            <% } %>
+                            <% for(let i = 0; i < employes.length; i++) { %>
+                                <option value="<%= employes[i].CodeEmploye %>"><%= employes[i].Prenom + " " + employes[i].Nom%></option>
+                                <% } %>
+                        </select>
+                        </div>
+                        <div class="formEntry">
+                            <label for="dateDebut">Date de début</label>
+                            <input type="date" id="dateDebut" name="dateDebut">
+                        </div>
+                        <div class="formEntry">
+                            <label for="dateFin">Date de fin</label>
+                            <input type="date" id="dateFin" name="dateFin">
+                        </div>
+                        <input type="submit"  id="submitPret" value="Creer le pret">
+                      </form>
+                    </div>
+                    <div class="retours">
+                        <% if(avertir != null && avertir === true) { %>
+                            <div class="reservationAlert">
+                                <div>
+                                    <h1>Attention une reservation existe pour ce document</h1>
+                                <p>effectuer le pret de  la reservation <%= reservationAvertir.CodeReservation %> </p>
+                                <button onclick="closeAlert()" ><i class="fa-solid fa-xmark" id="X"></i></button>
+                
+                                <ul>
+                                    <li>
+                                        Pour :
+                                        <% let membre; %>
+                                        <% membre = membres.find(m => m.CodeMembre === reservationAvertir.CodeMembre); %>
+                                        <%= (membre.Prenom ? membre.Prenom : '') + " " + (membre.Nom ? membre.Nom : '') %>
+                                    </li>
+                                    <li>
+                                        Document:
+                                        <% let documentInfo; %>
+                                        <% documentInfo = documents.find(d => d.CodeDocument === reservationAvertir.CodeDocument); %>
+                                        <%= documentInfo.Titre %>
+                                    </li>
+                                    
+                                </ul>
+                                </div>
+                            </div>
+                        <% } %>
+                        <h1>Effectuer un retour</h1>
+                        <form action="#" id="formRetour" method="post" >
+                            <div class="formEntry">
+                                <label for="selectedDocument">Choisir un document</label>
+                                <select id="listPret" name="selectedCodePret">
+                                  <% for(let i = 0; i < prets.length; i++) { %>
+                                    <% if(prets[i].Actif) { %>
+                                        <option value="<%= prets[i].CodePret %>">
+                                            <% let document = documents.find(doc => doc.CodeDocument === prets[i].CodeDocument); %>
+                                            <% let membre; %>
+                
+                                            <% if (prets[i].CodeMembre.includes('MBR')) { %>
+                                                <% membre = membres.find(m => m.CodeMembre === prets[i].CodeMembre); %>
+                                            <% } else { %>
+                                                 <% membre = employes.find(e => e.CodeEmploye === prets[i].CodeMembre); %>
+                                            <% } %>
+                
+                                            <% if (document && membre) { %>
+                                                <%= document.Titre + " - " + (membre.Prenom ? membre.Prenom : '') + " " + (membre.Nom ? membre.Nom : '') +' - '+ prets[i].CodePret %>
+                                            <% } %>
+                                        </option>
+                                    <% } %> 
+                                <% } %>
+                                </select>
+                            </div>
+                            <input type="submit" value="Effectuer retour" >
+                        </form>
+                    </div>
+            </div>
+                <div>
+                    <div class="listPret">
+                        <h2>Liste des prets</h2>
+                        <button class="flip" onclick="hideElement('.listPret'); showElement('.listRetards')"><i class="fa-solid fa-rotate"></i></button>
+                        <% for(let i = 0; i < prets.length; i++) { %>
+                                <div class="pretItem">
+                                <h2> 
+                                    Pret pour: 
+                                    <% let membre = membres.find(m => m.CodeMembre === prets[i].CodeMembre) || employes.find(m => m.CodeEmploye === prets[i].CodeMembre); %>
+                                    <% if (membre) { %>
+                                        <span class="auteur"><%= membre.Prenom %> <%= membre.Nom %></span>
+                                    <% } else { %>
+                                        <span class="auteur">Membre non trouvé</span>
+                                    <% } %>
+                                </h2>
+                                <ul>
+                                  <li>Document: 
+                                    <% let document = documents.find(d => d.CodeDocument === prets[i].CodeDocument); %>
+                                    <%= document.Titre %>
+                                </li>
+                                  <li>Date debut: <%= prets[i].DateDebut %></li>
+                                  <li>Date fin: <%= prets[i].DateFin %></li>
+                                  <li>Actif: <%= prets[i].Actif? 'oui': 'non' %></li>
+                                </ul>
+                                </div>
+                            <% } %>
+                    </div>
+                    <div class="listRetards">
+                        <h2>Liste des retards</h2>
+                        <button class="flip" onclick="hideElement('.listRetards'); showElement('.listPret')"><i class="fa-solid fa-rotate"></i></button>
+                        <% if (latePrets != null) { %>
+                        <% for(let i = 0; i < latePrets.length; i++) { %>
+                            <div class="retardItem">
+                                <h2> Pret <%= latePrets[i].CodePret %> de
+                                    <% let membre = membres.find(m => m.CodeMembre === latePrets[i].CodeMembre); %>
+                                    <span class="auteur"><%= membre.Prenom %>  <%=membre.Nom%></span> 
+                                </h2>
+                                <ul>
+                                  <li>Document: 
+                                    <% let document = documents.find(d => d.CodeDocument === latePrets[i].CodeDocument); %>
+                                    <%= document.Titre %>
+                                </li>
+                                  <li>Date debut: <%= latePrets[i].DateDebut %></li>
+                                  <li>Date fin: <%= latePrets[i].DateFin %></li>
+                                  <li>Actif: <%= latePrets[i].Actif? 'oui': 'non' %></li>
+                                </ul>
+                                </div>
+                        <% } %>
+                        <% } %>
+                    </div>
+                </div>
+        </div>
+    </div>
+        
+        
+   </div>
+<script>
+  const currentUrl = window.location.origin + window.location.pathname;//recupere URL de la page
+const parts = currentUrl.split('/');//coupe URL
+const name = parts[parts.length - 2]; // recupere le params :name de URL
+
+
+const formRetour = document.getElementById('formRetour');//recupere formulaire retour
+const formPret = document.getElementById('formPret')
+
+formRetour.action = `/employe/${name}/retourner`;//etablie le lien action avec params :name
+formPret.action = `/employe/${name}/creerPret`;//etablie le lien action avec params :name
+const flipBtn = document.getElementsByClassName('flip')
+
+function closeAlert(){
+    var reservationAlert = document.querySelector('.reservationAlert');
+    reservationAlert.style.display = 'none';  
+    
+}
+document.addEventListener('DOMContentLoaded', function() {//quand la page charge
+   const today = new Date(); // recupere date 
+   const todayFin = new Date()
+   today.setDate(today.getDate()-1);//retire un jour pour minimum
+   let todayFormat = today.toISOString().split('T')[0];//formate la date courrante en 'yyyy-mm-dd'
+   let todayFinFormat = todayFin.toISOString().split('T')[0];
+    const dateDebutInput = document.getElementById('dateDebut');//recupere le input 
+    const dateFinInput = document.getElementById('dateFin');//recupere le input 
+
+    if (dateDebutInput) {
+        dateDebutInput.setAttribute('min', todayFormat); //etalie la date minimale pour cette input
+    }
+    if(dateFinInput){
+        dateFinInput.setAttribute('min', todayFinFormat); //etalie la date minimale pour cette input
+    }  
+});
+function hideElement(id) {//pour cacher l'element au id specifie
+    var element = document.querySelector(id);
+    if (element) {
+      element.style.display = 'none';
+      console.log("cache");
+    }
+    
+  }
+  function showElement(id) {
+    var element = document.querySelector(id);
+    if (element) {
+      element.style.display= 'block'; 
+      console.log("visble");
+    }
+  }
+</script>
+</body>
+</html>

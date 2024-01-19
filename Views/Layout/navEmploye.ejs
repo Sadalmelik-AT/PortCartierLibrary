@@ -1,0 +1,208 @@
+<nav>
+    <div class="navHeader">
+        <button onclick="openClose()"><i class="fa-solid fa-bars" id="hamburger"></i><i class="fa-solid fa-xmark" id="cross"></i></button>
+        <img id="logo" src="/Assets/logo.jpg" alt="logo">
+        <div><h1 id="title">Bibliotheque Port-Cartier</h1>
+        <h2 id="quote">La collection que vous allez adorer</h2>
+        </div>
+        <hr>
+    </div>
+        
+        
+    <ul>
+        <li><i class="fa-solid fa-user-large-slash"></i><a href="/logout">Déconnexion</a></li>
+        <li><i class="fa-solid fa-check-double"></i><a id="reservation" href="#">Reservations</a></li>
+        <li><i class="fa-solid fa-right-left"></i><a id="pretRetour" href="#">Prets/Retours</a></li>
+        <li><i class="fa-solid fa-folder-open"></i><a id="toutLink" href="#">Collection complete</a></li>
+        <li><i class="fa-solid fa-users"></i><a id="membreLink" href="#">Membres</a></li>
+        <li>
+            <details>
+                <summary>Categories</summary> 
+                <div>
+                    <li><i class="fa-solid fa-book"></i><a id="livreLink" href="#">livres</a></li>
+                <li><i class="fa-solid fa-film"></i><a id="filmLink" href="#">films</a></li>
+                <li><i class="fa-solid fa-gamepad"></i><a id="jeuxLink" href="#">jeux</a></li>
+                <li><i class="fa-solid fa-music"></i><a id="musiqueLink" href="#">musiques</a></li>
+                </div>
+            </details>
+        </li>
+        <li>
+            <details>
+                <summary>Classement</summary>
+                <div>
+                    <li><i class="fa-brands fa-odnoklassniki"></i></i><a id="enfantLink" href="#">enfant</a></li>
+                <li><i class="fa-solid fa-child"></i><a id="adoLink" href="#">ado</a></li>
+                <li><i class="fa-solid fa-person"></i><a id="adultLink" href="#">adulte</a></li>
+                </div>
+            </details>
+        </li>
+        <li>
+            <details>
+                <summary>Genres</summary>
+                    <div>
+                        <% for (let i = 0; i < genres.length; i++) { %>
+                            <li ><i class="fa-solid fa-arrow-right"></i><a class="genreItem" id="<%= `${genres[i]}Link`%>" href="#"><%= genres[i] %></a></li>
+                          <% } %>
+                    </div>
+            </details>
+        </li>
+        <li>
+            <details>
+                <summary>Titre</summary>
+                <div>
+                    <form id="formTitre" action="#" method="get">
+                        <input type="text" id="Titre" name="Titre" placeholder="Entrez un titre de document">
+                        <input type="submit" value="rechercher">
+                    </form>
+                </div>
+            </details>
+        </li>
+        
+    </ul>
+</nav>
+
+<script>
+    let menuOpen = false;//menu fermee
+    const hamb = document.getElementById('hamburger');//recupere icone hamburger
+    const cross = document.getElementById('cross');//recupere icone X
+    const nav = document.querySelector('nav');
+   function openClose(){//fonction ouvrir fermer menu
+    if (menuOpen) {//si menu ouvert
+    menuOpen = !menuOpen;//ouvre le menu
+    nav.style.left = '0'; //fait apparaitre le menu
+    hamb.style.display = 'none';//enleve icone hamburger
+    cross.style.display = 'block';//fait apparaitre icone X
+  } else {//sinon
+    menuOpen = !menuOpen;//ferme le menu
+    nav.style.left = '-200px'; // fair disparaitre le menu
+    hamb.style.display = 'block';//fait apparetre icone hamburger
+    cross.style.display = 'none';//eneleve icone X
+  }
+   }
+   //Cette partie du code est assez confuse et redondante, j'avais un probleme de creation d'url dynamique a partir de la page reservation
+   //Ce format de code a regler le probleme je compte essayer de simplifier a la fin du projet si j'y arrive. Meme probleme surviendra
+   //dans la navEmploye
+    const currentURL = window.location.origin + window.location.pathname;//recupere l"URL courant
+    let resrvURL = `${window.location.origin + window.location.pathname}`
+    let livreURL = `${currentURL.replace('/reservation', '')}?Categorie=Livre`;//URL filtre Livre
+    let tousURL =`${currentURL.replace('/reservation', '')}`;//URL tous les document
+    let filmURL = `${currentURL.replace('/reservation', '')}?Categorie=Film`;//URL filtre Film
+    let jeuxURL = `${currentURL.replace('/reservation', '')}?Categorie=Jeux`;//URL filtre Jeux
+    let musiqueURL = `${currentURL.replace('/reservation', '')}?Categorie=Musique`;//URL filtre Musique
+    let enfantURL = `${currentURL.replace('/reservation', '')}?Classement=enfant`;//URL filtre Musique
+    let adoURL = `${currentURL.replace('/reservation', '')}?Classement=ado`;//URL filtre Musique
+    let adulteURL = `${currentURL.replace('/reservation', '')}?Classement=adulte`;//URL filtre Musique
+    let pretRetourURL = `${currentURL.replace('/reservation', '')}/pretRetour`;//URL pret et retour
+    let titreURL = `${currentURL.replace('/reservation', '')}?Titre=`;//URL titre document
+    let membreURL = `${currentURL.replace('/reservation', '')}/membres`;//URL liste membre
+
+
+    let listeGenres = document.querySelectorAll('.genreItem');
+
+
+    //Creation des URL
+   if(currentURL.includes('/reservation')){
+     resrvURL = `${window.location.origin + window.location.pathname}`
+     livreURL = `${currentURL.replace('/reservation', '')}?Categorie=Livre`;//URL filtre Livre
+     tousURL =`${currentURL.replace('/reservation', '')}`;//URL tous les document
+     filmURL = `${currentURL.replace('/reservation', '')}?Categorie=Film`;//URL filtre Film
+     jeuxURL = `${currentURL.replace('/reservation', '')}?Categorie=Jeux`;//URL filtre Jeux
+     musiqueURL = `${currentURL.replace('/reservation', '')}?Categorie=Musique`;//URL filtre Musique
+     pretRetourURL = `${currentURL.replace('/reservation', '')}/pretRetour`;//URL pret et retour
+     membreURL = `${currentURL.replace('/reservation', '')}/membres`;//URL page membre
+
+   }else if(currentURL.includes('/pretRetour')) {
+    resrvURL = `${currentURL.replace('/pretRetour', '')}/reservation`;
+    livreURL = `${currentURL.replace('/pretRetour', '')}?Categorie=Livre`;//URL filtre Livre
+     tousURL =`${currentURL.replace('/pretRetour', '')}`;//URL tous les document
+     filmURL = `${currentURL.replace('/pretRetour', '')}?Categorie=Film`;//URL filtre Film
+     jeuxURL = `${currentURL.replace('/pretRetour', '')}?Categorie=Jeux`;//URL filtre Jeux
+     musiqueURL = `${currentURL.replace('/pretRetour', '')}?Categorie=Musique`;//URL filtre Musique
+     pretRetourURL = `${currentURL.replace('/pretRetour', '')}/pretRetour`;//URL pret et retour
+     membreURL = `${currentURL.replace('/pretRetour', '')}/membres`;//URL page membre
+   } else if(currentURL.includes('/retourner')){
+    tousURL =`${currentURL.replace('/retourner', '')}`;//URL tous les document
+    pretRetourURL = `${currentURL.replace('/retourner', '')}/pretRetour`
+    resrvURL = `${currentURL.replace('/retourner', '')}/reservation`
+    filmURL = `${currentURL.replace('/retourner', '')}?Categorie=Film`;//URL filtre Film
+     jeuxURL = `${currentURL.replace('/retourner', '')}?Categorie=Jeux`;//URL filtre Jeux
+     musiqueURL = `${currentURL.replace('/retourner', '')}?Categorie=Musique`;//URL filtre Musique
+     pretRetourURL = `${currentURL.replace('/retourner', '')}/pretRetour`;//URL pret et retour
+     membreURL = `${currentURL.replace('/retourner', '')}/membres`;//URL page membre
+   } else if(currentURL.includes('/creerPret')){
+    tousURL =`${currentURL.replace('/creerPret', '')}`;//URL tous les document
+    pretRetourURL = `${currentURL.replace('/creerPret', '')}/pretRetour`
+    resrvURL = `${currentURL.replace('/creerPret', '')}/reservation`
+    filmURL = `${currentURL.replace('/creerPret', '')}?Categorie=Film`;//URL filtre Film
+     jeuxURL = `${currentURL.replace('/creerPret', '')}?Categorie=Jeux`;//URL filtre Jeux
+     musiqueURL = `${currentURL.replace('/creerPret', '')}?Categorie=Musique`;//URL filtre Musique
+     pretRetourURL = `${currentURL.replace('/creerPret', '')}/pretRetour`;//URL pret et retour
+     membreURL = `${currentURL.replace('/creerPret', '')}/membres`;//URL page membre
+   }else if(currentURL.includes('/membres')){
+    tousURL =`${currentURL.replace('/membres', '')}`;//URL tous les document
+    pretRetourURL = `${currentURL.replace('/membres', '')}/pretRetour`
+    resrvURL = `${currentURL.replace('/membres', '')}/reservation`
+    filmURL = `${currentURL.replace('/membres', '')}?Categorie=Film`;//URL filtre Film
+     jeuxURL = `${currentURL.replace('/membres', '')}?Categorie=Jeux`;//URL filtre Jeux
+     musiqueURL = `${currentURL.replace('/membres', '')}?Categorie=Musique`;//URL filtre Musique
+     pretRetourURL = `${currentURL.replace('/membres', '')}/pretRetour`;//URL pret et retour
+     membreURL = `${currentURL.replace('/membres', '')}/membres`;//URL page membre
+   }
+   else{
+    resrvURL = `${window.location.origin + window.location.pathname}/reservation`
+     tousURL =`${currentURL}`;//URL tous les document
+     livreURL = `${currentURL}?Categorie=Livre`;//URL filtre Livre
+     filmURL = `${currentURL}?Categorie=Film`;//URL filtre Film
+     jeuxURL = `${currentURL}?Categorie=Jeux`;//URL filtre Jeux
+     musiqueURL = `${currentURL}?Categorie=Musique`;//URL filtre Musique
+     pretRetourURL = `${currentURL}/pretRetour`;//URL pret et retour
+     membreURL = `${currentURL}/membres`;//URL page membre
+   }
+   const formTitre = document.getElementById('formTitre');
+    // affectation des URL aux liens
+    document.getElementById('reservation').setAttribute('href', resrvURL);
+    document.getElementById('pretRetour').setAttribute('href', pretRetourURL);//Vers page pret/retour
+    document.getElementById('toutLink').setAttribute('href', tousURL);//Tous les document
+    document.getElementById('livreLink').setAttribute('href', livreURL);//Tous les livres
+    document.getElementById('filmLink').setAttribute('href', filmURL);//Tous les films
+    document.getElementById('jeuxLink').setAttribute('href', jeuxURL);//Tous les jeux
+    document.getElementById('musiqueLink').setAttribute('href', musiqueURL);//Toutes les musiques
+
+    document.getElementById('enfantLink').setAttribute('href', enfantURL);//Toutes les documents enfant
+    document.getElementById('adoLink').setAttribute('href', adoURL);//Toutes les documents ado
+    document.getElementById('adultLink').setAttribute('href', adulteURL);//Toutes les documents adulte 
+    document.getElementById('membreLink').setAttribute('href', membreURL)
+    
+    formTitre.setAttribute('action', titreURL);
+    
+    formTitre.addEventListener('submit', (event) => {
+    event.preventDefault(); // Prevent the default form submission behavior
+    
+    let rechercheTitre = document.getElementById('Titre').value; // Get the input value
+    titreURL = titreURL + rechercheTitre; // Replace this with your base URL
+    
+    // Update the form's action attribute with the modified URL including the input value
+    formTitre.setAttribute('action', titreURL);
+     
+    formTitre.submit();
+});
+    
+    
+    
+
+
+
+    listeGenres.forEach(genreItem => {
+    let url = `${currentURL.replace('/reservation', '')}?Genre=${genreItem.id.split('Link')[0]}`;
+    let element = document.getElementById(genreItem.id); // Use genreItem.id directly
+    if (element) {
+        element.setAttribute('href', url);
+        console.log(`Set URL for ${genreItem.id}: ${url}`);
+    } else {
+        console.log(`Element ${genreItem.id} not found.`);
+    }
+});
+
+
+
+</script>

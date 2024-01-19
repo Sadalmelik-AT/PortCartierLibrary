@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page connectée</title>
+</head>
+<body>
+<h1>Page connectée</h1>
+
+<% if (authenticated) { %>
+    <p><%= user.Nom %></p>
+    <a href="/logout">Déconnexion</a>
+<% } else { %>
+    <p><%= user.Nom %></p>
+    <a href="/">Retour à la page d'accueil</a>
+<% } %>
+</body>
+</html>

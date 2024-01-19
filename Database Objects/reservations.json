@@ -1,0 +1,18 @@
+[
+    {
+      "CodeReservation": "RES001",
+      "CodeMembre": "MBR001",
+      "CodeDocument": "M001",
+      "DateReservation": "2023-12-14",
+      "En cours": true
+    },
+    {
+      "CodeReservation": "RES002",
+      "CodeMembre": "MBR001",
+      "CodeDocument": "B001",
+      "DateReservation": "2023-12-14",
+      "En cours": true
+    }
+    
+    
+]
